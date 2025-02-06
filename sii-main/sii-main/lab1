@@ -1,0 +1,22 @@
+DOMAINS
+s=symbol
+PREDICATES
+model(s)
+type (s)
+kalibr (s)
+typepot (s)
+ysl(s,s,s,s)
+vibor(s,s,s,s)
+CLAUSES
+type(avtkalash). type(snavint). type(pistmak). type(revruzg).
+kalibr("5,45"). kalibr("9"). kalibr("9,27"). kalibr("12").
+typepot(avt). typepot(vint). typepot(pist). typepot(ruzg). 
+model(ak45). model(vintorez). model(pm). model(mc255).
+ysl(avt,"5,45",avtkalash,ak45).
+ysl(vint,"9",snavint,vintorez).
+ysl(pist,"9,27",pistmak,pm).
+ysl(ruzg,"12",revruzg,mc255).
+vibor(A,B,C,D):-type(A), kalibr(B), typepot(C), model (D),
+ysl(A,B,C,D),!.
+GOAL
+ysl(vint,"9",snavint,D).
