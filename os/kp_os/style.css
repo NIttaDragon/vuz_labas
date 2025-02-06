@@ -1,0 +1,146 @@
+:root {
+  --bg-color: #22577a;
+  --text-color: #c7f9cc;
+  --actent-color-pink: #e97dac;
+  --actent-color-blue: #38a3a5;
+}
+
+.body {
+  max-width: 1024px;
+  background-color:  var(--bg-color);
+  margin: auto;
+}
+
+.title {
+  color: var(--text-color);
+  text-shadow: 4px 4px 0px var(--actent-color-pink);
+  font-family: serif;
+  font-size: 157px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 82.5%;
+  margin: 80px 0;
+}
+
+.paragraf {
+  background-color: var(--actent-color-blue);
+  color: var(--text-color);
+  padding-left: 5px;
+}
+
+.paragraf:hover {
+  color: var(--bg-color);
+}
+
+.actent {
+  text-shadow: 1px 1px 0px var(--actent-color-pink);
+}
+
+.actent:hover {
+  color: var(--actent-color-pink);
+  text-shadow: 1px 1px 0px var(--text-color);
+}
+
+.under-line-actent {
+  text-decoration: underline;
+  text-decoration-color: var(--actent-color-pink);
+}
+
+.text {
+  font-family: sans-serif;
+  color: #c7f9cc;
+}
+
+.list::marker {
+  color:#e97dac;
+}
+
+.string {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.no_line {
+  text-decoration: none;
+}
+
+table {
+  max-width: 300px;
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid var(--actent-color-pink);
+}
+
+th {
+  text-align: center;
+  padding: 10px;
+	border: 3px solid var(--actent-color-pink);
+}
+
+td {
+  text-align: left;
+	padding: 10px;
+	border: 3px solid var(--actent-color-pink);
+}
+
+.wraper_form{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.wraper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.wraper2{
+  display: flex;
+  flex-direction: column;
+}
+
+.cell{
+  text-align: center;
+}
+
+button {
+  border: var(--actent-color-pink) 1px solid;
+  background-color: transparent;
+  color: #c7f9cc;
+  border-radius: 50px;
+}
+
+button:disabled {
+  border: #f7b8d3 1px solid;
+  color: #bdc4c1;
+  background-color: #8c9ba3;
+}
+
+button:hover:enabled {
+  border: #ff006f 1px solid;
+  background-color: #3f789f; 
+}
+
+form {
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: 500px;
+  border: var(--actent-color-pink) 1px solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.result {
+  margin-bottom: 80px;
+}

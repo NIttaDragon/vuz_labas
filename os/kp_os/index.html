@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Страничное представление памяти</title>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+
+<body class="body">
+  <header class="header">
+    <h1 class="title">
+      Страничное представление памяти
+    </h1>
+  </header>
+  <section>
+    <h2 class="paragraf">
+      Теоретическая справка
+    </h2>
+    <p class="text">
+      <span class="actent">Страничное представление памяти (paging)</span> — это метод управления памятью, используемый в современных операционных системах для эффективного управления виртуальной памятью. Он основан на разделении как виртуального, так и физического адресного пространства на фиксированные по размеру блоки, называемые страницами (pages). Размер страницы, как правило, составляет 4 КБ или 8 КБ, но может варьироваться в зависимости от архитектуры системы.
+    </p> 
+    <br>
+    <p class="text">
+      <span class="actent">Виртуальное адресное пространство процесса</span> представляет собой логическое пространство адресов, видимое процессу.
+    </p> 
+    <br>
+    <p class="text">
+      <span class="actent">Физическое адресное пространство</span> — это реальное пространство адресов оперативной памяти. Страничное отображение осуществляет динамическое сопоставление виртуальных адресов с физическими. Это сопоставление реализуется с помощью таблиц страниц (page tables), которые содержат для каждой страницы процесса запись, указывающую на ее физический адрес в оперативной памяти или на то, что страница находится на вторичном запоминающем устройстве (например, жестком диске) и в данный момент не загружена в оперативную память (swap space).
+    </p> 
+    <br>
+    <p class="text">
+      В каждой записи таблицы страниц содержится, по меньшей мере, следующая информация:
+    </p>
+    <ul>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Номер страницы (page frame number):</span> Номер физической страницы в оперативной памяти, на которую отображается виртуальная страница. Если страница не загружена, это поле содержит специальное значение (например, -1).
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Флаг присутствия (present bit):</span> Указывает, находится ли страница в оперативной памяти (1) или нет (0).
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Флаги доступа (access bits):</span> Регистрируют, были ли к странице обращения на чтение или запись. Используются для реализации алгоритмов замены страниц.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Флаг модификации (modified bit):</span> Указывает, были ли данные на странице изменены после загрузки в оперативную память. Используется для оптимизации операций выгрузки страниц на диск (грязные страницы должны быть записаны на диск перед заменой).
+        </p>
+      </li>
+    </ul> 
+    <br>
+    <p class="text">
+      При доступе к виртуальному адресу, аппаратное обеспечение системы (MMU - Memory Management Unit) использует таблицу страниц для преобразования виртуального адреса в физический. Если флаг присутствия равен 0 (страница не в памяти), происходит прерывание, обрабатываемое операционной системой. ОС загружает необходимую страницу из вторичного запоминающего устройства в оперативную память (page fault), выбирая подходящую физическую страницу для размещения (алгоритмы замены страниц, например, FIFO, LRU, CLOCK). После загрузки страницы, таблица страниц обновляется, и выполнение программы возобновляется.
+    </p> 
+    <br>
+    <p class="text">
+      Преимущества страничного представления памяти:
+    </p>
+    <ul>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Логическая адресация:</span> Процессы работают с логическими адресами, независимыми от физического размещения в памяти.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Обменная память:</span> Возможность размещения части виртуального адресного пространства на вторичном запоминающем устройстве.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Защита памяти:</span> Разделение адресных пространств процессов предотвращает взаимное влияние и обеспечивает безопасность.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Эффективное использование памяти:</span> Размещение только необходимых страниц в оперативной памяти.
+        </p>
+      </li>
+    </ul> 
+    <br>
+    <h2 class="paragraf">
+      Перевод виртуального адреса в физический
+    </h2>
+    <p class="text">
+      Структура виртуального адреса:
+    </p>
+    <ul>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Номер страницы (Page Number, VPN):</span> Указывает на какой странице памяти находится требуемый байт.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Смещение в странице (Page Offset, PO):</span> Указывает на положение байта внутри выбранной страницы.
+        </p>
+      </li>
+    </ul> 
+    <br>
+    <p class="text">
+      Для больших виртуальных адресных пространств, использование одной большой таблицы страничной трансляции неэффективно. Поэтому часто применяются многоуровневые таблицы. Рассмотрим двух-уровневую схему (часто встречается на практике):
+    </p>
+    <ul>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Таблица страниц верхнего уровня (Page Directory):</span> Каждая запись в это таблице содержит физический адрес таблицы страниц второго уровня (или флаг, указывающий на невалидную страницу).
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Таблица страниц нижнего уровня (Page Table):</span> Каждая запись в таблице содержит физический адрес страницы в физической памяти (Frame Number, FN) или флаг, указывающий на невалидную страницу.
+        </p>
+      </li>
+    </ul> 
+    <br>
+    <p class="text">
+      <span class="actent">TLB (Translation Lookaside Buffer)</span> — это кэш, хранящий последние переводы виртуальных адресов в физические.
+    </p> <br>
+    <p class="text">
+      Процесс трансляции:
+    </p>
+    <ol>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Разбиение виртуального адреса:</span> Процессор делит виртуальный адрес на VPN1, VPN2 и PO.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Обращение к TLB:</span> Проверяются последние переводы виртуальных адресов в физические. Если запись с нужным виртуальным адресом найдена в TLB, то обращение к таблицам страничной трансляции пропускается.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Обращение к таблице страниц верхнего уровня:</span> Используя VPN1 в качестве индекса, процессор находит запись в таблице страниц верхнего уровня (Page Directory). Эта запись содержит физический адрес таблицы страниц второго уровня.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Обращение к таблицам страниц нижнего уровня:</span> Процессор загружает таблицу страниц второго уровня по найденному адресу. Затем, используя VPN2 в качестве индекса, процессор находит запись в этой таблице. Эта запись содержит физический адрес (Frame Number, FN) соответствующей страницы в физической памяти, или флаг, указывающий, что страница не загружена в память (page fault).
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Обработка page fault:</span> Если страница не находится в памяти (в записи указан page fault), происходит прерывание (page fault). Операционная система загружает необходимую страницу из вторичной памяти (например, жесткого диска) в физическую память и обновляет таблицу страничной трансляции.
+        </p>
+      </li>
+      <li class="list">
+        <p class="text">
+          <span class="under-line-actent">Формирование физического адреса:</span> После успешного поиска физического адреса страницы (FN) в таблице страниц нижнего уровня, процессор объединяет FN и PO для получения полного физического адреса.
+        </p>
+      </li>
+    </ol> 
+    <br>
+  </section>
+  <section>
+    <h2 class="paragraf">
+      Наглядный пример
+    </h2>
+    <div class="wraper">
+      <div class="wraper2">
+        <div class="process">
+          <p class="text">
+            Процесс 1
+          </p>
+          <table table>
+            <thead>
+              <tr>
+                <th class="text">
+                  Виртуальная страница
+                </th>
+                <th class="text">
+                  Физическая страница
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text cell">0</td>
+                <td class="text cell">5</td>
+              </tr>
+              <tr>
+                <td class="text cell">1</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">2</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">3</td>
+                <td class="text cell">10</td>
+              </tr>
+              <tr>
+                <td class="text cell">4</td>
+                <td class="text cell">2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="process">
+          <p class="text">
+            Процесс 2
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th class="text">
+                  Виртуальная страница
+                </th>
+                <th class="text">
+                  Физическая страница
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text cell">0</td>
+                <td class="text cell">8</td>
+              </tr>
+              <tr>
+                <td class="text cell">1</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">2</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">3</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">4</td>
+                <td class="text cell">ВП</td>
+              </tr>
+              <tr>
+                <td class="text cell">5</td>
+                <td class="text cell">11</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="process">
+        <p class="text">
+          Физическая память
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th class="text">
+                Физическая память
+              </th>
+              <th class="text">
+                Физическая страница
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">0</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">1</td>
+            </tr>
+            <tr>
+              <td class="text cell">4 (пр.1)</td>
+              <td class="text cell">2</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">3</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">4</td>
+            </tr>
+            <tr>
+              <td class="text cell">0 (пр.1)</td>
+              <td class="text cell">5</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">6</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">7</td>
+            </tr>
+            <tr>
+              <td class="text cell">0 (пр.2)</td>
+              <td class="text cell">8</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">9</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">10</td>
+            </tr>
+            <tr>
+              <td class="text cell">5 (пр.2)</td>
+              <td class="text cell">11</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">12</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">13</td>
+            </tr>
+            <tr>
+              <td class="text cell"></td>
+              <td class="text cell">14</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> 
+    <br>
+    <form>
+      <label class="text" for="virtualMemoryPage">Введите номер страницы виртуальной памяти:</label>
+      <div class="wraper_form">
+        <input type="text" id="virtualMemoryPage" name="vmp" placeholder="1234567F">
+        <button class="res_b" type="button">
+          Рассчитать
+        </button>
+        <button class="clr_b" type="button" disabled>
+          Очистить
+        </button>
+      </div>
+    </form>
+    <div class="result">
+      <div class="string" id="vp_hex">
+        <p class="text under-line-actent">
+          Номер виртуальной страницы в hex-коде: 
+        </p>
+      </div>
+      <div class="string" id="vp_bin">
+        <p class="text under-line-actent">
+          Номер виртуальной страницы в двоичном коде: 
+        </p>
+      </div>
+      <div class="string" id="id_ul">
+        <p class="text under-line-actent">
+          Индекс в таблице страниц верхнего уровня: 
+        </p>
+      </div>
+      <div class="string" id="id_ll">
+        <p class="text under-line-actent">
+          Индекс в таблице страниц нижнего уровня: 
+        </p>
+      </div>
+      <div class="string" id="smesh">
+        <p class="text under-line-actent">
+          Смещение на странице: 
+        </p>
+      </div>
+      <p class="text">
+        Номер физической страницы = (Frame number * Размер страницы) + Смещение на странице
+      </p>
+      <div class="string" id="fp">
+        <p class="text under-line-actent">
+          Номер физической страницы:
+        </p>
+      </div>
+    </div>
+  <script src="script.js"></script>
+</body>
+</html>

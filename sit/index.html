@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Добавление данных</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Добавление данных</h1>
+    <label for="fio">ФИО:</label>
+    <input type="text" id="fio" name="fio" required><br><br>
+
+    <label for="startStation">Начальная станция:</label>
+    <select id="startStation" name="startStation" required>
+      <option value="">Выберите станцию</option>
+      </select><br><br>
+
+    <label for="endStation">Конечная станция:</label>
+    <select id="endStation" name="endStation" required>
+      <option value="">Выберите станцию</option>
+      </select><br><br>
+
+    <button id="addButton">Добавить</button>
+    <div id="message"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
