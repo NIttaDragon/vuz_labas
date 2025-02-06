@@ -1,0 +1,30 @@
+#include <stdio.h>
+int main()
+{
+  printf("a->b\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("c->b\n");
+  printf("b->a\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("c->b\n");
+  printf("b->a\n");
+  printf("c->b\n");
+  printf("a->b\n");
+  printf("b->c\n");
+  printf("b->a\n");
+  printf("c->b\n");
+  printf("b->a\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("c->b\n");
+  printf("a->b\n");
+  printf("b->c\n");
+  printf("a->b\n");
+  printf("b->c\n");
+}

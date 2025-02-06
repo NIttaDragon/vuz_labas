@@ -1,0 +1,96 @@
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+#include "art.h"
+
+int main()
+{
+  printf("Перенести с А на B");
+  printf("\n");
+  printf("Начальная позиция\n");
+  printf("1 0 0\n");
+  printf("2 0 0\n");
+  printf("3 0 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 1\n");
+  printf("0 0 0\n");
+  printf("2 0 0\n");
+  printf("3 1 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 2\n");
+  printf("0 0 0\n");
+  printf("2 0 0\n");
+  printf("3 0 1\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 3\n");
+  printf("0 0 0\n");
+  printf("0 0 0\n");
+  printf("3 2 1\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 4\n");
+  printf("0 0 0\n");
+  printf("0 1 0\n");
+  printf("3 2 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 5\n");
+  printf("0 0 0\n");
+  printf("1 0 0\n");
+  printf("3 2 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 6\n");
+  printf("0 0 0\n");
+  printf("1 0 0\n");
+  printf("3 0 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 7\n");
+  printf("0 0 0\n");
+  printf("0 0 0\n");
+  printf("3 1 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 8\n");
+  printf("0 0 0\n");
+  printf("0 0 1\n");
+  printf("3 0 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 9\n");
+  printf("0 0 0\n");
+  printf("0 0 1\n");
+  printf("0 3 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 10\n");
+  printf("0 0 0\n");
+  printf("0 1 0\n");
+  printf("0 3 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 11\n");
+  printf("0 0 0\n");
+  printf("0 0 0\n");
+  printf("1 3 2\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 12\n");
+  printf("0 0 0\n");
+  printf("0 2 0\n");
+  printf("1 3 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("шаг 13\n");
+  printf("0 1 0\n");
+  printf("0 2 0\n");
+  printf("0 3 0\n");
+  printf("A B C\n");
+  printf("\n");
+  printf("Башня перенесена за 13 шагов\n");
+  return 0;
+}
