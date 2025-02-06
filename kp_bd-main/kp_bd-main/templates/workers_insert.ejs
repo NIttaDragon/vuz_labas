@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Worker Table</p>
+<table id = 'worker_table'>
+    <thead>
+    <tr>
+        <th>ID работника</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Пол</th>
+        <th>Дата рождения</th>
+        <th>Дата приёма на работу</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(element =>{%>
+    <tr>
+        <th><%=element.worker_id%></th>
+        <th><%=element.first_name%></th>
+        <th><%=element.last_name%></th>
+        <th><%=element.sex%></th>
+        <th><%=element.birth%></th>
+        <th><%=element.work_date%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<h4>Добавить элемент</h4>
+<form action="/workers/insert" method="post">
+    <input type="text" placeholder="ID Работника" name="input_worker_id">
+    <input type="text" placeholder="Имя" name="input_first_name">
+    <input type="text" placeholder="Фамилия" name="input_last_name">
+    <input type="text" placeholder="Пол" name="input_sex">
+    <input type="text" placeholder="Дата рождения" name="input_birth">
+    <input type="text" placeholder="Дата приёма на работу" name="input_work_date">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<div id='products'>
+    <p>Products Table</p>
+    <table id = 'products_table'>
+        <thead>
+        <tr>
+            <th>ID товара</th>
+            <th>Цена</th>
+            <th>ID фабрики</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%data.forEach(products_element =>{%>
+        <tr>
+            <th><%=products_element.product_id%></th>
+            <th><%=products_element.price%></th>
+            <th><%=products_element.fk_fabric_id%></th>
+        </tr>
+        <%})%>
+        </tbody>
+    </table>
+</div>
+<p>
+    <button>
+        <a href="http://localhost:8080/products/insert">Добавить элемент</a>
+    </button>
+    <button>
+        <a href="http://localhost:8080/products/delete">Удалить элемент</a>
+    </button>
+</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Fabric Table</p>
+<table id = 'fabric_table'>
+    <thead>
+    <tr>
+        <th>ID фабрики</th>
+        <th>Страна</th>
+        <th>Город</th>
+        <th>Название фабрики</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(fabric_element =>{%>
+    <tr>
+        <th><%=fabric_element.fabric_id%></th>
+        <th><%=fabric_element.country%></th>
+        <th><%=fabric_element.town%></th>
+        <th><%=fabric_element.fabric_name%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<h4>Добавить элемент</h4>
+<form action="/fabric/insert" method="post">
+    <input type="text" placeholder="ID Фабрики" name="input_fabric_id">
+    <input type="text" placeholder="Страна" name="input_country">
+    <input type="text" placeholder="Город" name="input_town">
+    <input type="text" placeholder="Название фабрики" name="input_fabric_name">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
+

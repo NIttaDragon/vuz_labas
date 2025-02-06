@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Worker Table</p>
+<table id = 'worker_table'>
+    <thead>
+    <tr>
+        <th>ID работника</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Пол</th>
+        <th>Дата рождения</th>
+        <th>Дата приёма на работу</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(element =>{%>
+    <tr>
+        <th><%=element.worker_id%></th>
+        <th><%=element.first_name%></th>
+        <th><%=element.last_name%></th>
+        <th><%=element.sex%></th>
+        <th><%=element.birth%></th>
+        <th><%=element.work_date%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<p>
+    <button>
+        <a href="http://localhost:8080/workers/insert">Добавить элемент</a>
+    </button>
+    <button>
+        <a href="http://localhost:8080/workers/delete">Удалить элемент</a>
+    </button>
+</p>
+</body>
+</html>

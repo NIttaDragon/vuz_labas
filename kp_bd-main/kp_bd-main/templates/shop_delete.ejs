@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Shops Table</p>
+<table id = 'shops_table'>
+    <thead>
+    <tr>
+        <th>ID магазина</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+        <th>Директор</th>
+        <th>Работник</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(element =>{%>
+    <tr>
+        <th><%=element.shop_id%></th>
+        <th><%=element.adressy%></th>
+        <th><%=element.phone%></th>
+        <th><%=element.fk_worker_id%></th>
+        <th><%=element.fk_worker_id%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<h4>Удалить элемент</h4>
+<form action="/shop/delete" method="post">
+    <input type="text" placeholder="ID Магазина" name="output_shop_id">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

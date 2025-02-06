@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Product_Shop Table</p>
+<table id = 'cars_table'>
+    <thead>
+    <tr>
+        <th>ID товара</th>
+        <th>ID магазина</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(element =>{%>
+    <tr>
+        <th><%=element.fk_product_id%></th>
+        <th><%=element.fk_shop_id%></th>
+        <th><%=element.existing%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<h4>Удалить элемент</h4>
+<form action="/product_shop/delete" method="post">
+    <input type="text" placeholder="ID Товара" name="output_fk_product_id">
+    <input type="text" placeholder="ID Магазина" name="output_fk_shop_id">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

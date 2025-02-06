@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Some Title</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<p>Product_Shop Table</p>
+<table id = 'cars_table'>
+    <thead>
+    <tr>
+        <th>ID товара</th>
+        <th>ID магазина</th>
+        <th>Количество</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%data.forEach(element =>{%>
+    <tr>
+        <th><%=element.fk_product_id%></th>
+        <th><%=element.fk_shop_id%></th>
+        <th><%=element.existing%></th>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+<p>
+    <button>
+        <a href="http://localhost:8080/product_shop/insert">Добавить элемент</a>
+    </button>
+    <button>
+        <a href="http://localhost:8080/product_shop/delete">Удалить элемент</a>
+    </button>
+</p>
+</body>
+</html>
